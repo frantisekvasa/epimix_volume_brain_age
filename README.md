@@ -4,4 +4,4 @@ Repository for the manuscript **Tissue volume estimation and age prediction usin
 
 For the manuscript, see: [link].
 
-For accompanying data, see [link].
+For accompanying data, see https://doi.org/10.6084/m9.figshare.18128225.
