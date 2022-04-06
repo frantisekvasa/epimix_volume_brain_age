@@ -296,6 +296,18 @@ plt.xlabel('T$_1$-w vol. (litres)',fontsize=lbs+2)       # labels
 plt.ylabel('EPImix T$_1$-w vol. (litres)',fontsize=lbs+2)
 if save_fig: plt.savefig(plot_dir+'/glob_vol_csf.svg',bbox_inches='tight')
 
+# %% statistics for Global Volume
+
+## Spearman rho
+stats.spearmanr(vol_t1[:,gm_id], vol_epi[ids_t1_subset,gm_id])          # GM
+stats.spearmanr(vol_t1[:,wm_id], vol_epi[ids_t1_subset,wm_id])          # WM
+stats.spearmanr(vol_t1[:,csf_id], vol_epi[ids_t1_subset,csf_id])        # CSF
+
+## Pearson's r-squared
+stats.pearsonr(vol_t1[:,gm_id], vol_epi[ids_t1_subset,gm_id])[0]**2     # GM
+stats.pearsonr(vol_t1[:,wm_id], vol_epi[ids_t1_subset,wm_id])[0]**2     # WM
+stats.pearsonr(vol_t1[:,csf_id], vol_epi[ids_t1_subset,csf_id])[0]**2   # CSF
+    
 # %% Global Volume comparison - Reduced FoV
 
 ## GM
@@ -340,6 +352,18 @@ plt.xlabel('T$_1$-w vol. (litres)',fontsize=lbs+2)       # labels
 plt.ylabel('EPImix T$_1$-w vol. (litres)',fontsize=lbs+2)
 if save_fig: plt.savefig(plot_dir+'/glob_vol_csf_fov.svg',bbox_inches='tight')
 
+# %% statistics for Global Volume - Reduced FoV
+
+## Spearman rho
+stats.spearmanr(vol_t1_fov[:,gm_id], vol_epi[ids_t1_subset,gm_id])          # GM
+stats.spearmanr(vol_t1_fov[:,wm_id], vol_epi[ids_t1_subset,wm_id])          # WM
+stats.spearmanr(vol_t1_fov[:,csf_id], vol_epi[ids_t1_subset,csf_id])        # CSF
+
+## Pearson's r-squared
+stats.pearsonr(vol_t1_fov[:,gm_id], vol_epi[ids_t1_subset,gm_id])[0]**2     # GM
+stats.pearsonr(vol_t1_fov[:,wm_id], vol_epi[ids_t1_subset,wm_id])[0]**2     # WM
+stats.pearsonr(vol_t1_fov[:,csf_id], vol_epi[ids_t1_subset,csf_id])[0]**2   # CSF
+    
 # %% Grey Matter volume as a function of (chronological) age
 
 # plot set-up
@@ -390,13 +414,13 @@ if save_fig: plt.savefig(plot_dir+'/gm_vs_age_epi_ALL.svg',bbox_inches='tight')
 stats.spearmanr(age[ids_t1_subset], vol_epi[ids_t1_subset,gm_id])       # EPImix
 stats.spearmanr(age[ids_t1_subset], vol_t1[:,gm_id])                    # T1
 stats.spearmanr(age[ids_t1_subset], vol_t1_fov[:,gm_id])                # T1 FoV
-#stats.spearmanr(age, vol_epi[:,gm_id])                                 # EPImix - ALL
+stats.spearmanr(age, vol_epi[:,gm_id])                                  # EPImix - ALL
 
 ## Pearson's r-squared
 stats.pearsonr(age[ids_t1_subset], vol_epi[ids_t1_subset,gm_id])[0]**2  # EPImix
 stats.pearsonr(age[ids_t1_subset], vol_t1[:,gm_id])[0]**2               # T1
 stats.pearsonr(age[ids_t1_subset], vol_t1_fov[:,gm_id])[0]**2           # T1 FoV
-#stats.spearmanr(age, vol_epi[:,gm_id])                                 # EPImix - ALL
+stats.pearsonr(age, vol_epi[:,gm_id])[0]**2                             # EPImix - ALL
 
 # %%
 
@@ -673,13 +697,13 @@ mae_t1_fov = median_absolute_error(age[ids_t1_subset], brain_age_t1_fov)        
 stats.spearmanr(age[ids_t1_subset], brain_age_epi[ids_t1_subset])       # EPImix
 stats.spearmanr(age[ids_t1_subset], brain_age_t1)                       # T1
 stats.spearmanr(age[ids_t1_subset], brain_age_t1_fov)                   # T1 FoV
-#stats.spearmanr(age,brain_age_epi)                                     # EPImix - ALL
+stats.spearmanr(age,brain_age_epi)                                      # EPImix - ALL
 
 ## Pearson's r-squared
 stats.pearsonr(age[ids_t1_subset], brain_age_epi[ids_t1_subset])[0]**2  # EPImix
 stats.pearsonr(age[ids_t1_subset], brain_age_t1)[0]**2                  # T1
 stats.pearsonr(age[ids_t1_subset], brain_age_t1_fov)[0]**2              # T1 FoV
-#stats.spearmanr(age,brain_age_epi)                                     # EPImix - ALL
+stats.pearsonr(age,brain_age_epi)[0]**2                                 # EPImix - ALL
 
 # %% plots of predicted ages 
 
